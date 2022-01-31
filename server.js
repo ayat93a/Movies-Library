@@ -1,21 +1,22 @@
-const express = require ('express')
-const cors = require ( "cors")
+const express = require ('express');
+const cors = require ( "cors");
 const app = express ();
 app.use(cors());
 app.get('/', movieHandler);
 app.get ('/favorite',favoriteHandler);
 app.get ('*', notFoundHandler);
-
-app.use(function (err, req, res, next) {
-    console.error(err.stack)
-    res.status(500).send(`"status" : 500,
-    "responseText" : "Sorry, something went wrong"`)
-  })
-
+app.use (errorHandler);
+const data = require (`Movie Data/data.json`)
+function errorHandler (error, req, res) {
+    //console.error(error.stack)
+    const error = {
+        status : 500 
+    }
+    res.status(500).send("Sorry, something went wrong")
+  }
 // host
-app.listen(54172, ()=>{
-
-    console.log('listening to port 54172')
+app.listen(3000, ()=>{
+    console.log('listening to port 3000')
 })
 
 ///Home Page Endpoint
