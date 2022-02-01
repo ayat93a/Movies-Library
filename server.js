@@ -38,6 +38,6 @@ function notFoundHandler (req,res){
     return res.status(404).send("page not found error")
 } 
 ////Handle errors 500
-app.listen(3000, ()=>{
-    console.log('listening to port 3000')
+app.listen(5500, ()=>{
+    console.log('listening to port 5500')
 })
