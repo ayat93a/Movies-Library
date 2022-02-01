@@ -5,36 +5,29 @@ app.use(cors());
 app.get('/', movieHandler);
 app.get ('/favorite',favoriteHandler);
 app.get ('*', notFoundHandler);
-app.use (errorHandler);
-const data = require (`Movie Data/data.json`)
-function errorHandler (error, req, res) {
+//app.use (errorHandler);
+///function errorHandler (error, req, res) {
     //console.error(error.stack)
-    const error = {
-        status : 500 
-    }
-    res.status(500).send("Sorry, something went wrong")
-  }
+//     const error = {
+//         status : 500 
+//     }
+//     res.status(500).send("Sorry, something went wrong")
+//   
 // host
-app.listen(3000, ()=>{
-    console.log('listening to port 3000')
-})
 
-///Home Page Endpoint
-const movieData= require ("Movie Data/data.json")
+
+//Home Page Endpoint
+const movieData= require ("./MovieData/data.json")
 function movie (title, poster_path , overview) {
     this.title = title;
     this.poster_path=poster_path;
     this.overview=overview;
-
 }
 function movieHandler (req,res){
-    let myMovie = [];
-    movieData.data.map (aMovie=>{
-        let oneMovie = new movie ( aMovie.title, aMovie.poster_path,
-            aMovie.overview)
-            myMovie.push(oneMovie)
-    })
-    return res.status(200).json(myMovie)
+        let oneMovie = new movie ( movieData.title, movieData.poster_path,
+            movieData.overview)
+    
+  res.send(oneMovie)
 }
 //// Favorite Page Endpoint
 function favoriteHandler (req,res){
@@ -43,5 +36,8 @@ function favoriteHandler (req,res){
 ////Handle errors 404
 function notFoundHandler (req,res){
     return res.status(404).send("page not found error")
-}
+} 
 ////Handle errors 500
+app.listen(3000, ()=>{
+    console.log('listening to port 3000')
+})
