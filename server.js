@@ -57,7 +57,7 @@ function searchHandler(req,res){
     })
 }
 ///Networks
-let userInputOfID = "1234"
+let userInputOfID = " " ///// my code work perfictly but i didnot found what i shall input as a user
 let networkgUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&network_id=${userInputOfID}`
 function networksHandler(req,res){
     axios.get(networkgUrl)
@@ -73,7 +73,7 @@ function networksHandler(req,res){
     })
 }
 ///Reviews
-let rate = "5"
+let rate = " " ///// my code work perfictly but i didnot found what i shall input as a user
 let rewiewUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&review_id=${rate}`
 function  reviewshHandler(req,res){
     axios.get(rewiewUrl)
