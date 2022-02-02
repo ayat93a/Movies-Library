@@ -14,6 +14,8 @@ in the terminal : npm init -y ,npm i express cors to download the required files
 check the available port in his device and change that in my code to the available for him and in the termenal npm start
 if thers no problem with the port type this in the search bar of the browser :
 https://localhost:(type here your available port number)
+//to run this file run these commands in your PC termenal 
+npm i express cors axios dotenv 
 
 ## Project Features
 a library of movie and a favourite movies page.
