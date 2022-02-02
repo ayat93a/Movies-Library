@@ -5,7 +5,6 @@ const express = require ('express');
 const cors = require ( "cors");
 const app = express ();
 const axios = require('axios')
-const PORT = 5500 ;
 app.use(cors());
 app.get('/', movieHandler);
 app.get ('/favorite',favoriteHandler);
@@ -18,20 +17,23 @@ app.get ('*', notFoundHandler);
 app.use (errorHandler);
 
 ////trending
-function Movies (id, title, releaseDate, posterPath ,overview){
+function Movies (id, title, release_date , poster_path ,overview){
     this.id = id;
     this.title = title;
-    this.releaseDate = releaseDate;
-    this.posterPath= posterPath;
-    this.overview
+    this.release_date= release_date;
+    this.poster_path= poster_path;
+    this.overview=overview
 }
-let trendingUrl = `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.APIKEY}&language=en-US`;
-function trendingHandler(res,req){
+let trendingUrl = `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.api_key}&language=en-US`;
+//console.log(trendingUrl)
+function trendingHandler(req,res){
 axios.get(trendingUrl)
  .then((result)=>{
-    // console.log(data.data.movies)///dont work for me
+// console.log(result.data)///dont work for me
   let movies =result.data.results.map(movie=>{
-      return new Movies(movie.id, movie.title, movie.releaseDate, movie.posterPath, movie.overview)
+      return new Movies(movie.id || " ", movie.title || " ", movie.release_date || " ", movie.poster_path || " ",
+       movie.overview || " ")
+      //console.log(result.data.results) 
   })
   res.status(200).json(movies)
  }).catch((err)=>{
@@ -39,13 +41,14 @@ axios.get(trendingUrl)
 })
 }
 /// search
-let usersearch = "The Ice Age Adventures of Buck Wild" 
-let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&query=${usersearch}`
-function searchHandler(res,req){
-    axios.get(trendingUrl)
+let usersearch = "Spider-Man: No Way Home" 
+let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&query=${usersearch}`
+function searchHandler(req,res){
+    axios.get(searchUrl)
     .then(result=>{
         let movies =result.data.results.map(movie=>{
-        return new Movies(movie.id, movie.title, movie.releaseDate, movie.posterPath, movie.overview)
+            return new Movies(movie.id || " ", movie.title || " ", movie.release_date || " ", movie.poster_path || " ",
+            movie.overview || " ")
     })
     res.status(200).json(movies)
     .catch((err)=>{
@@ -54,12 +57,14 @@ function searchHandler(res,req){
     })
 }
 ///Networks
-let userInputOfID = "1234"
-let networkgUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&network_id=${userInputOfID}`
-function networksHandler(res,req){
+let userInputOfID = " " ///// my code work perfictly but i didnot found what i shall input as a user
+let networkgUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&network_id=${userInputOfID}`
+function networksHandler(req,res){
     axios.get(networkgUrl)
-    .then(result=>{let movies =result.data.results.map(movie=>{
-        return new Movies(movie.id, movie.title, movie.releaseDate, movie.posterPath, movie.overview)
+    .then(result=>{
+        let movies =result.data.results.map(movie=>{
+            return new Movies(movie.id || " ", movie.title || " ", movie.release_date || " ", movie.poster_path || " ",
+            movie.overview || " ")
     })
     res.status(200).json(movies)
     .catch((err)=>{
@@ -68,12 +73,12 @@ function networksHandler(res,req){
     })
 }
 ///Reviews
-let rate = "5"
-let rewiewUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&review_id=${rate}`
-function  reviewshHandler(res,req){
+let rate = " " ///// my code work perfictly but i didnot found what i shall input as a user
+let rewiewUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&review_id=${rate}`
+function  reviewshHandler(req,res){
     axios.get(rewiewUrl)
     .then(result=>{let movies =result.data.results.map(movie=>{
-        return new Movies(movie.id, movie.title, movie.releaseDate, movie.posterPath, movie.overview)
+        return new Movies(movie.id, movie.title, movie.release_date, movie.poster_path, movie.overview)
     })
     res.status(200).json(movies)
     .catch((err)=>{
