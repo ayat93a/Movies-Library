@@ -14,6 +14,7 @@ app.get('/search', searchHandler);
 app.get('/Networks', networksHandler);
 app.get('/Reviews', reviewshHandler);
 app.get ('*', notFoundHandler);
+
 app.use (errorHandler);
 
 ////trending
@@ -80,6 +81,7 @@ function  reviewshHandler(res,req){
     })
     })
 }
+
 //Home Page Endpoint
 const movieData= require ("./MovieData/data.json")
 function movie (title, poster_path , overview) {
@@ -100,7 +102,6 @@ function favoriteHandler (req,res){
 ////Handle errors 404
 function notFoundHandler (req,res){
     return res.status(404).send("page not found error")
-
 }
  ///Error 500
 function errorHandler (error, req, res) {
@@ -108,6 +109,6 @@ function errorHandler (error, req, res) {
     res.status(500).send("Sorry, something went wrong")}
 
 ////// host
-app.listen(PORT, ()=>{
-    console.log(`listening to port ${PORT}`)
+app.listen(5500, ()=>{
+    console.log('listening to port 5500')
 })
