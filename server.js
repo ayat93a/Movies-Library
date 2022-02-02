@@ -24,11 +24,13 @@ function Movies (id, title, releaseDate, posterPath ,overview){
     this.posterPath= posterPath;
     this.overview
 }
-let trendingUrl = `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.APIKEY}&language=en-US`;
+let trendingUrl = `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.api_key}&language=en-US`;
 function trendingHandler(res,req){
+    console.log(trendingUrl)
 axios.get(trendingUrl)
  .then((result)=>{
-    // console.log(data.data.movies)///dont work for me
+     console.log(result.data)
+ ///dont work for me
   let movies =result.data.results.map(movie=>{
       return new Movies(movie.id, movie.title, movie.releaseDate, movie.posterPath, movie.overview)
   })
@@ -38,8 +40,8 @@ axios.get(trendingUrl)
 })
 }
 /// search
-let usersearch = "The Ice Age Adventures of Buck Wild" 
-let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&query=${usersearch}`
+let usersearch = "Spider-Man: No Way Home" 
+let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&query=${usersearch}&language=en-US`
 function searchHandler(res,req){
     axios.get(trendingUrl)
     .then(result=>{
@@ -54,7 +56,7 @@ function searchHandler(res,req){
 }
 ///Networks
 let userInputOfID = "1234"
-let networkgUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&network_id=${userInputOfID}`
+let networkgUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&network_id=${userInputOfID}`
 function networksHandler(res,req){
     axios.get(networkgUrl)
     .then(result=>{let movies =result.data.results.map(movie=>{
@@ -68,7 +70,7 @@ function networksHandler(res,req){
 }
 ///Reviews
 let rate = "5"
-let rewiewUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&review_id=${rate}`
+let rewiewUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&review_id=${rate}`
 function  reviewshHandler(res,req){
     axios.get(rewiewUrl)
     .then(result=>{let movies =result.data.results.map(movie=>{
