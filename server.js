@@ -38,7 +38,7 @@ axios.get(trendingUrl)
 })
 }
 /// search
-let usersearch = " kids" /// all films in the link isn't for adult
+let usersearch = "The Ice Age Adventures of Buck Wild" 
 let searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.APIKEY}&query=${usersearch}`
 function searchHandler(res,req){
     axios.get(trendingUrl)
