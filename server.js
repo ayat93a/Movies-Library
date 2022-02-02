@@ -24,7 +24,7 @@ function Movies (id, title, releaseDate, posterPath ,overview){
     this.posterPath= posterPath;
     this.overview
 }
-let trendingUrl = `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.APIKEY}&language=en-US`;
+let trendingUrl = `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.api_key}&language=en-US`;
 function trendingHandler(res,req){
 axios.get(trendingUrl)
  .then((result)=>{
