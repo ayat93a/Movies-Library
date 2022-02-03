@@ -18,6 +18,7 @@ app.get('/Reviews', reviewshHandler);
 app.post("/addMovie", addMovieHandler);////////////////////task13
 app.get("/getMovies", getMoviesHandler)
 
+
 app.put(`/updateMovie/:id`,updateMoviHandler);///task14
 app.delete(`/deleteMovie/:id`,deleteMovieHandler);///task14
 
@@ -172,6 +173,7 @@ function getMoviesHandler (req,res){
         errorHandler(err,req,res)
        })
 }
+
 
 
 //////////////////////errorsHandler

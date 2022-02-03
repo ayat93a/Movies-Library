@@ -4,8 +4,11 @@
 **Author Name**: Ayat Alkayed
 
 ## WRRC
+
 ![](WRRC/WRRC.jpg)
 ![](WRRC/WRRC12.jpg)
+![](WRRC/WRRC3.jpg)
+
 
 ## Overview
 A server for a movie library was created.
@@ -17,6 +20,13 @@ if thers no problem with the port type this in the search bar of the browser :
 https://localhost:(type here your available port number)
 //to run this file run these commands in your PC termenal 
 npm i express cors axios dotenv 
-
+to open each page use the folloeing extensions 
+hoem use '/' extension 
+favorite page use '/favorite'
+trending page use '/trending'
+to search use '/search'
+for networks use '/Networks'
+gor reviews '/Reviews'
 ## Project Features
 a library of movie and a favourite movies page.
+you can now add fo your favourite and save them in your app from 02-02-2022
