@@ -113,9 +113,8 @@ function favoriteHandler (req,res){
 ///13
 app.post("/addMovie", addMovieHandler)
 function addMovieHandler (req,res){
-    console.log(req.body)
-    
-    res.status(200).json(req.body)
+    //console.log(req.body)
+    res.status(200).send("hi")
 }
 ////Handle errors 404
 function notFoundHandler (req,res){
