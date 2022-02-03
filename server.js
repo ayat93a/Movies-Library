@@ -77,8 +77,10 @@ let rate = " " ///// my code work perfictly but i didnot found what i shall inpu
 let rewiewUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&review_id=${rate}`
 function  reviewshHandler(req,res){
     axios.get(rewiewUrl)
+
     .then(result=>
         {let movies =result.data.results.map(movie=>{
+
         return new Movies(movie.id, movie.title, movie.release_date, movie.poster_path, movie.overview)
     })
     res.status(200).json(movies)
@@ -131,9 +133,11 @@ function addMovieHandler (req,res){
 
 
 
+
 client.connect().then (()=>{
     app.listen(5500, ()=>{
         console.log('listening to port 5500')
     })
+
 })
 
