@@ -7,6 +7,7 @@
 
 ![](WRRC/WRRC.jpg)
 ![](WRRC/WRRC12.jpg)
+![](WRRC/WRRC3.jpg)
 
 
 ## Overview
@@ -28,3 +29,4 @@ for networks use '/Networks'
 gor reviews '/Reviews'
 ## Project Features
 a library of movie and a favourite movies page.
+you can now add fo your favourite and save them in your app from 02-02-2022
