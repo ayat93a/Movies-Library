@@ -9,8 +9,6 @@ const pg = require("pg");//////////task 13
 const client= new pg.Client(process.env.databaseUrl)//////////task 13
 app.use(cors());
 app.use(express.json()); ///////////task 13
-
-
 app.get('/', movieHandler);
 app.get ('/favorite',favoriteHandler);
 app.get('/trending', trendingHandler);
@@ -23,7 +21,7 @@ app.get("/getMovies", getMoviesHandler)
 app.put(`/updateMovie/:id`,updateMoviHandler);///task14
 app.delete(`/deleteMovie/:id`,deleteMovieHandler);///task14
 
-app.get(`/oneMovie/:id` , oneMovieHandler);////task14
+app.get(`/getMovies/:id` , oneMovieHandler);////task14
 
 app.get ('*', notFoundHandler);
 app.use (errorHandler);
