@@ -10,6 +10,7 @@ const client= new pg.Client(process.env.databaseUrl)//////////task 13
 app.use(cors());
 app.use(express.json()); ///////////task 13
 
+
 app.get('/', movieHandler);
 app.get ('/favorite',favoriteHandler);
 app.get('/trending', trendingHandler);
@@ -83,8 +84,10 @@ let rate = " " ///// my code work perfictly but i didnot found what i shall inpu
 let rewiewUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&review_id=${rate}`
 function  reviewshHandler(req,res){
     axios.get(rewiewUrl)
+
     .then(result=>
         {let movies =result.data.results.map(movie=>{
+
         return new Movies(movie.id, movie.title, movie.release_date, movie.poster_path, movie.overview)
     })
     res.status(200).json(movies)
@@ -112,6 +115,7 @@ function favoriteHandler (req,res){
     return res.status(200).send ("Welcome to Favorite Page") ;
 } 
 
+
 //////////////////////////////////////////////////Task13
 
 function addMovieHandler (req,res){
@@ -137,6 +141,8 @@ function getMoviesHandler (req,res){
 
 
 //////////////////////errorsHandler
+
+
 ////Handle errors 404
 function notFoundHandler (req,res){
     return res.status(404).send("page not found error")
@@ -147,14 +153,6 @@ function notFoundHandler (req,res){
 function errorHandler (err, req, res) {
     //console.error(error.stack)
     res.status(500).send("Sorry, something went wrong")}
-
-
-
-
-
-
-
-
 
 
 ////////////////////////listen to port 
