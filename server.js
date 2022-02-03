@@ -77,7 +77,10 @@ let rate = " " ///// my code work perfictly but i didnot found what i shall inpu
 let rewiewUrl = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.api_key}&review_id=${rate}`
 function  reviewshHandler(req,res){
     axios.get(rewiewUrl)
-    .then(result=>{let movies =result.data.results.map(movie=>{
+
+    .then(result=>
+        {let movies =result.data.results.map(movie=>{
+
         return new Movies(movie.id, movie.title, movie.release_date, movie.poster_path, movie.overview)
     })
     res.status(200).json(movies)
@@ -112,8 +115,29 @@ function notFoundHandler (req,res){
 function errorHandler (error, req, res) {
     //console.error(error.stack)
     res.status(500).send("Sorry, something went wrong")}
+    ////////////////////Task 13
 
-////// host
-app.listen(5500, ()=>{
-    console.log('listening to port 5500')
+app.post("/addMovie", addMovieHandler)
+//app.get ("/getMovies" ,getMoviesHandler)
+
+const pg = require("pg");
+const client= new pg.Client(process.env.databaseUrl)
+
+function addMovieHandler (req,res){
+
+}
+
+
+
+
+
+
+
+
+client.connect().then (()=>{
+    app.listen(5500, ()=>{
+        console.log('listening to port 5500')
+    })
+
 })
+
