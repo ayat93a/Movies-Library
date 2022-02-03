@@ -5,13 +5,19 @@ const express = require ('express');
 const cors = require ( "cors");
 const app = express ();
 const axios = require('axios')
+const pg = require("pg");//////////task 13
+const client= new pg.Client(process.env.databaseUrl)//////////task 13
 app.use(cors());
+app.use(express.json()); ///////////task 13
+
 app.get('/', movieHandler);
 app.get ('/favorite',favoriteHandler);
 app.get('/trending', trendingHandler);
 app.get('/search', searchHandler);
 app.get('/Networks', networksHandler);
 app.get('/Reviews', reviewshHandler);
+app.post("/addMovie", addMovieHandler);////////////////////task13
+app.get("/getMovies", getMoviesHandler)
 app.get ('*', notFoundHandler);
 
 app.use (errorHandler);
@@ -105,35 +111,58 @@ function movieHandler (req,res){
 function favoriteHandler (req,res){
     return res.status(200).send ("Welcome to Favorite Page") ;
 } 
+
+//////////////////////////////////////////////////Task13
+
+function addMovieHandler (req,res){
+   const movie= req.body
+    let sql = `INSERT INTO mymovies(title,release_date, poster_path, overview) VALUES ($1 , $2 , $3 ,$4)RETURNING *;`
+   let values =[movie.title, movie.release_date, movie.poster_path, movie.overview]
+   client.query(sql,values).then(data =>{
+    res.status(200).json(data.rows);
+   }) .catch (err =>{
+    errorHandler(err,req,res)
+   })
+  
+}
+//////////////
+function getMoviesHandler (req,res){
+    let sql = `SELECT * FROM mymovies;`
+    client.query(sql).then(data=>{
+      res.status(200).json(data.rows);
+    }) .catch (err =>{
+        errorHandler(err,req,res)
+       })
+}
+
+
+//////////////////////errorsHandler
 ////Handle errors 404
 function notFoundHandler (req,res){
     return res.status(404).send("page not found error")
 }
+
+   
  ///Error 500
-function errorHandler (error, req, res) {
+function errorHandler (err, req, res) {
     //console.error(error.stack)
     res.status(500).send("Sorry, something went wrong")}
-    ////////////////////Task 13
-
-app.post("/addMovie", addMovieHandler)
-//app.get ("/getMovies" ,getMoviesHandler)
-
-const pg = require("pg");
-const client= new pg.Client(process.env.databaseUrl)
-
-function addMovieHandler (req,res){
-
-}
 
 
 
 
 
 
+
+
+
+
+////////////////////////listen to port 
 
 client.connect().then (()=>{
-    app.listen(5500, ()=>{
-        console.log('listening to port 5500')
-    })
-})
+   app.listen(4000, ()=>{
+       console.log('listening to port 4000')
+   })
+ })
+
 
