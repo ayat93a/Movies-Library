@@ -5,7 +5,11 @@ const express = require ('express');
 const cors = require ( "cors");
 const app = express ();
 const axios = require('axios')
+const pg = require("pg");
+const client= new pg.Client(process.env.databaseUrl)
 app.use(cors());
+app.use(express.json());
+
 app.get('/', movieHandler);
 app.get ('/favorite',favoriteHandler);
 app.get('/trending', trendingHandler);
@@ -107,25 +111,30 @@ function movieHandler (req,res){
 function favoriteHandler (req,res){
     return res.status(200).send ("Welcome to Favorite Page") ;
 } 
+
+///13
+app.post("/addMovie", addMovieHandler)
+function addMovieHandler (req,res){
+    //console.log(req.body)
+    res.status(200).send("hi")
+}
 ////Handle errors 404
 function notFoundHandler (req,res){
     return res.status(404).send("page not found error")
 }
+
+   
  ///Error 500
-function errorHandler (error, req, res) {
+function errorHandler (err, req, res) {
     //console.error(error.stack)
     res.status(500).send("Sorry, something went wrong")}
-    ////////////////////Task 13
+//     ////////////////////Task 13
 
-app.post("/addMovie", addMovieHandler)
+
 //app.get ("/getMovies" ,getMoviesHandler)
 
-const pg = require("pg");
-const client= new pg.Client(process.env.databaseUrl)
 
-function addMovieHandler (req,res){
 
-}
 
 
 
@@ -135,9 +144,9 @@ function addMovieHandler (req,res){
 
 
 client.connect().then (()=>{
-    app.listen(5500, ()=>{
-        console.log('listening to port 5500')
-    })
+   app.listen(4000, ()=>{
+       console.log('listening to port 4000')
+   })
+ })
 
-})
 
