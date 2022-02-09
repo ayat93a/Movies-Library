@@ -6,7 +6,8 @@ const cors = require ( "cors");
 const app = express ();
 const axios = require('axios')
 const pg = require("pg");//////////task 13
-const client= new pg.Client(process.env.databaseUrl)//////////task 13
+const client = new pg.Client({     connectionString: process.env.DATABASE_URL,     ssl: { rejectUnauthorized: false } })
+//const client= new pg.Client(process.env.databaseUrl)//////////task 13
 app.use(cors());
 app.use(express.json()); ///////////task 13
 app.get('/', movieHandler);
