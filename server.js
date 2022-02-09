@@ -193,7 +193,7 @@ function errorHandler (err, req, res) {
 ////////////////////////listen to port 
 
 client.connect().then (()=>{
-   app.listen(4000, ()=>{
+   app.listen(process.env.PORT, ()=>{
        console.log('listening to port 4000')
    })
  })
